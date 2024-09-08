@@ -1,0 +1,29 @@
+version: '2.3'
+
+services:
+
+  # docker-compose up
+
+  frontend:
+    build: ./app
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+  
+  backend:
+    build: ./api
+    ports:
+      - 8080:8080
+  
+  # TODO:
+  # docker-compose run program "anchor build"
+
+  program:
+    build: 
+      context: .
+      dockerfile: ./programs/Dockerfile
+    volumes:
+      - ./:./
+    profiles:
+      - program
